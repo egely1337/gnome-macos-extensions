@@ -1589,14 +1589,45 @@ export default class MacosDockExtension extends Extension {
         Main.wm.allowKeybinding('overlay-key',
             Shell.ActionMode.NORMAL | Shell.ActionMode.OVERVIEW | Shell.ActionMode.POPUP);
 
-        // Land on the desktop after login, not in the overview. Extensions
-        // usually load after the startup animation has already brought the
-        // overview up, so hide it again once that animation is done.
+        // The three-finger swipe up opens Launchpad too, not the overview.
+        // As with Super, the overview's handlers are only blocked.
+        this._overviewSwipe = Main.overview._swipeTracker;
+        if (this._overviewSwipe) {
+            GObject.signal_handlers_block_matched(this._overviewSwipe, {signalId: 'begin'});
+            GObject.signal_handlers_block_matched(this._overviewSwipe, {signalId: 'update'});
+            GObject.signal_handlers_block_matched(this._overviewSwipe, {signalId: 'end'});
+            this._overviewSwipe.connectObject(
+                'begin', tracker => {
+                    // Only from the desktop; in the overview the swipe is
+                    // still ours, so swiping there just does nothing.
+                    if (!Main.overview.visible && !this._launchpad.isOpen)
+                        tracker.confirmSwipe(global.screen_height, [0, 1], 0, 0);
+                },
+                'end', (tracker, duration, endProgress) => {
+                    if (endProgress >= 1)
+                        this._launchpad.open();
+                },
+                this);
+        }
+
+        // Land on the desktop after login, not in the overview. Hiding the
+        // overview once its startup animation is done leaves the screen
+        // half-drawn until something repaints it, so instead the session
+        // pretends to have no overview while starting up. GNOME then plays
+        // its plain zoom-in animation and never shows the overview at all.
         if (Main.layoutManager._startingUp) {
-            Main.layoutManager.connectObject('startup-complete', () => {
-                Main.layoutManager.disconnectObject(this);
-                Main.overview.hide();
-            }, this);
+            this._hadOverview = Main.sessionMode.hasOverview;
+            Main.sessionMode.hasOverview = false;
+            Main.layoutManager.connectObject('startup-complete',
+                () => this._restoreOverview(), this);
+        }
+    }
+
+    _restoreOverview() {
+        Main.layoutManager.disconnectObject(this);
+        if (this._hadOverview !== undefined) {
+            Main.sessionMode.hasOverview = this._hadOverview;
+            delete this._hadOverview;
         }
     }
 
@@ -1605,7 +1636,15 @@ export default class MacosDockExtension extends Extension {
         GObject.signal_handlers_unblock_matched(global.display, {signalId: 'overlay-key'});
         Main.wm.allowKeybinding('overlay-key',
             Shell.ActionMode.NORMAL | Shell.ActionMode.OVERVIEW);
-        Main.layoutManager.disconnectObject(this);
+        this._restoreOverview();
+
+        if (this._overviewSwipe) {
+            this._overviewSwipe.disconnectObject(this);
+            GObject.signal_handlers_unblock_matched(this._overviewSwipe, {signalId: 'begin'});
+            GObject.signal_handlers_unblock_matched(this._overviewSwipe, {signalId: 'update'});
+            GObject.signal_handlers_unblock_matched(this._overviewSwipe, {signalId: 'end'});
+            this._overviewSwipe = null;
+        }
 
         const controls = Main.overview._overview?.controls;
         if (controls) {
