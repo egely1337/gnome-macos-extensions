@@ -1,0 +1,7 @@
+{
+  "uuid": "macos-spotlight@egely1337",
+  "name": "macOS Spotlight",
+  "description": "A frosted-glass, macOS-style Spotlight search on Super+Space: apps, files, settings, calculator and anything else GNOME search providers offer.",
+  "shell-version": ["50"],
+  "version": 1
+}

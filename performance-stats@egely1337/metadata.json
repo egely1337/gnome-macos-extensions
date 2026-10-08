@@ -1,0 +1,7 @@
+{
+  "uuid": "performance-stats@egely1337",
+  "name": "Performance Stats",
+  "description": "Power drain, CPU and RAM graphs and the top CPU-consuming app, always visible in the top bar.",
+  "shell-version": ["46", "47", "48", "49", "50"],
+  "version": 1
+}

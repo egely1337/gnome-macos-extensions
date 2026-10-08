@@ -1,0 +1,7 @@
+{
+  "uuid": "macos-animations@egely1337",
+  "name": "macOS Window Animations",
+  "description": "macOS-style window animations: genie effect when minimizing to the dock, zoom-in on open, fade-out on close.",
+  "shell-version": ["50"],
+  "version": 1
+}

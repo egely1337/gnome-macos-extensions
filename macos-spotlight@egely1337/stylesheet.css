@@ -1,0 +1,110 @@
+/* Tint laid over the blurred glass, with the light inner hairline macOS
+ * draws around its materials. */
+.macos-spotlight {
+    background-color: rgba(36, 36, 40, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 16px;
+}
+
+/* Under the glass. St draws no shadow for a see-through widget, so it has
+ * a background; the glass covers all of it but the shadow. */
+.macos-spotlight-shadow {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 16px;
+    box-shadow: 0 16px 44px 0 rgba(0, 0, 0, 0.8);
+}
+
+.macos-spotlight-header {
+    padding: 12px 18px;
+    spacing: 12px;
+}
+
+.macos-spotlight-search-icon {
+    icon-size: 22px;
+    color: rgba(255, 255, 255, 0.62);
+}
+
+.macos-spotlight-entry,
+.macos-spotlight-entry:focus,
+.macos-spotlight-entry:hover {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 4px 0;
+    color: #ffffff;
+    caret-color: #ffffff;
+    selection-background-color: rgba(10, 132, 255, 0.85);
+    selected-color: #ffffff;
+    font-size: 19pt;
+    font-weight: 300;
+}
+
+.macos-spotlight-entry StLabel.hint-text {
+    color: rgba(255, 255, 255, 0.42);
+}
+
+.macos-spotlight-separator {
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.macos-spotlight-results {
+    padding: 4px 8px 10px 8px;
+}
+
+.macos-spotlight-section {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 8.5pt;
+    font-weight: bold;
+    padding: 10px 10px 4px 10px;
+}
+
+.macos-spotlight-row {
+    border-radius: 8px;
+    padding: 5px 10px;
+    background-color: transparent;
+    color: #ffffff;
+}
+
+.macos-spotlight-row.top-hit {
+    padding: 7px 10px;
+}
+
+.macos-spotlight-row:selected {
+    background-color: rgba(10, 132, 255, 0.9);
+}
+
+.macos-spotlight-row-box {
+    spacing: 12px;
+}
+
+.macos-spotlight-row-title {
+    font-size: 11pt;
+    color: #ffffff;
+}
+
+.top-hit .macos-spotlight-row-title {
+    font-size: 13pt;
+    font-weight: 500;
+}
+
+.macos-spotlight-row-description {
+    font-size: 9pt;
+    color: rgba(255, 255, 255, 0.55);
+    padding-top: 1px;
+}
+
+.macos-spotlight-row:selected .macos-spotlight-row-description,
+.macos-spotlight-row:selected .macos-spotlight-row-kind {
+    color: rgba(255, 255, 255, 0.82);
+}
+
+.macos-spotlight-row-kind {
+    font-size: 9pt;
+    color: rgba(255, 255, 255, 0.4);
+    padding-left: 8px;
+}
+
+.macos-spotlight-web-icon {
+    color: rgba(255, 255, 255, 0.85);
+}

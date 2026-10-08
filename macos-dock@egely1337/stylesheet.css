@@ -1,0 +1,181 @@
+/* Tint laid over the blurred glass, with the light inner hairline macOS
+ * draws around its materials. The shader adds the sheen and rim light. */
+.macos-dock {
+    background-gradient-direction: vertical;
+    background-gradient-start: rgba(60, 60, 70, 0.22);
+    background-gradient-end: rgba(20, 20, 26, 0.42);
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    border-radius: 24px;
+}
+
+/* The dark hairline just outside the dock that separates it from bright
+ * backgrounds. */
+.macos-dock-outline {
+    border: 1px solid rgba(0, 0, 0, 0.35);
+    border-radius: 25px;
+}
+
+/* St draws no shadow for a see-through widget, so this has a background;
+ * the glass covers all of it but the shadow. The shadow's strength is its
+ * color's alpha times the background's. */
+.macos-dock-shadow {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 24px;
+    box-shadow: 0 10px 32px 0 rgba(0, 0, 0, 0.8);
+}
+
+.macos-dock-dot {
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 3px;
+    box-shadow: 0 0 6px 1px rgba(255, 255, 255, 0.45);
+}
+
+.macos-dock-dot.focused {
+    background-color: #8fd0ff;
+    box-shadow: 0 0 8px 2px rgba(80, 170, 255, 0.75);
+}
+
+.macos-dock-separator {
+    background-gradient-direction: vertical;
+    background-gradient-start: rgba(255, 255, 255, 0.05);
+    background-gradient-end: rgba(255, 255, 255, 0.35);
+}
+
+/* Under a minimized window's preview in the dock. */
+.macos-dock-window-shadow {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.25);
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.45);
+}
+
+.macos-dock-launchpad {
+    background-gradient-direction: vertical;
+    background-gradient-start: #f4f4f6;
+    background-gradient-end: #c8c8ce;
+}
+
+/* Opaque so the arrow tucked behind it doesn't show through. */
+.macos-dock-tooltip {
+    background-color: #26262b;
+    color: #f2f2f2;
+    border-radius: 8px;
+    padding: 5px 12px;
+    font-size: 10.5pt;
+    font-weight: 500;
+}
+
+.macos-dock-tooltip-arrow {
+    background-color: #26262b;
+    border-radius: 2px;
+}
+
+/* Launchpad */
+.macos-launchpad-aurora {
+    background-color: black;
+}
+
+.macos-launchpad-search {
+    background-color: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 18px;
+    color: #ffffff;
+    caret-color: #ffffff;
+    selection-background-color: rgba(10, 132, 255, 0.85);
+    selected-color: #ffffff;
+    padding: 7px 14px;
+    font-size: 11.5pt;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
+}
+
+.macos-launchpad-search:focus {
+    background-color: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.32);
+    box-shadow: 0 0 14px 2px rgba(120, 180, 255, 0.35);
+}
+
+.macos-launchpad-search StLabel.hint-text {
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.macos-launchpad-search-icon {
+    icon-size: 15px;
+    color: rgba(255, 255, 255, 0.75);
+    padding-right: 6px;
+}
+
+.macos-launchpad-item {
+    border-radius: 20px;
+    padding: 8px 6px;
+    background-color: transparent;
+    border: 1px solid transparent;
+}
+
+/* Keyboard selection: a sheet of glass behind the icon. */
+.macos-launchpad-item:selected {
+    background-gradient-direction: vertical;
+    background-gradient-start: rgba(255, 255, 255, 0.22);
+    background-gradient-end: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+}
+
+.macos-launchpad-label {
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 10.5pt;
+    font-weight: 500;
+    padding-top: 9px;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+.macos-launchpad-item:hover .macos-launchpad-label,
+.macos-launchpad-item:selected .macos-launchpad-label {
+    color: #ffffff;
+}
+
+.macos-launchpad-running {
+    width: 5px;
+    height: 5px;
+    margin-top: 4px;
+    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 6px 1px rgba(140, 200, 255, 0.8);
+}
+
+.macos-launchpad-dots {
+    spacing: 10px;
+}
+
+.macos-launchpad-dot {
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.macos-launchpad-dot:hover {
+    background-color: rgba(255, 255, 255, 0.55);
+}
+
+.macos-launchpad-dot:checked {
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+.macos-launchpad-empty {
+    spacing: 8px;
+}
+
+.macos-launchpad-empty-icon {
+    icon-size: 56px;
+    color: rgba(255, 255, 255, 0.4);
+    padding-bottom: 6px;
+}
+
+.macos-launchpad-empty-title {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 20pt;
+    font-weight: 300;
+}
+
+.macos-launchpad-empty-hint {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 11pt;
+}

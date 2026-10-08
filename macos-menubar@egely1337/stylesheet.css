@@ -1,0 +1,592 @@
+/* The bar itself is see-through; the frosted glass below it shows. */
+#panel.macos-menubar-panel {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+/* Tint laid over the blurred glass, with a faint hairline at the bottom. */
+.macos-menubar {
+    background-gradient-direction: vertical;
+    background-gradient-start: rgba(28, 28, 34, 0.34);
+    background-gradient-end: rgba(18, 18, 24, 0.48);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* Buttons: soft rounded highlights instead of GNOME's pills, and white
+ * text that stays legible over any wallpaper. */
+#panel.macos-menubar-panel .panel-button {
+    color: rgba(255, 255, 255, 0.96);
+    font-weight: normal;
+    border-radius: 7px;
+    -natural-hpadding: 10px;
+    -minimum-hpadding: 6px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+    icon-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+    transition-duration: 160ms;
+}
+
+#panel.macos-menubar-panel .panel-button:hover,
+#panel.macos-menubar-panel .panel-button:focus {
+    box-shadow: inset 0 0 0 100px rgba(255, 255, 255, 0.14);
+}
+
+#panel.macos-menubar-panel .panel-button:active,
+#panel.macos-menubar-panel .panel-button:checked,
+#panel.macos-menubar-panel .panel-button:active:hover,
+#panel.macos-menubar-panel .panel-button:checked:hover {
+    box-shadow: inset 0 0 0 100px rgba(255, 255, 255, 0.24);
+}
+
+/* GNOME highlights the clock text rather than the whole button. */
+#panel.macos-menubar-panel .panel-button.clock-display .clock {
+    border-radius: 7px;
+    font-feature-settings: "tnum";
+}
+
+#panel.macos-menubar-panel .panel-button.clock-display:hover .clock,
+#panel.macos-menubar-panel .panel-button.clock-display:focus .clock {
+    box-shadow: inset 0 0 0 100px rgba(255, 255, 255, 0.14);
+}
+
+#panel.macos-menubar-panel .panel-button.clock-display:active .clock,
+#panel.macos-menubar-panel .panel-button.clock-display:checked .clock {
+    box-shadow: inset 0 0 0 100px rgba(255, 255, 255, 0.24);
+}
+
+.macos-menubar-app-label {
+    font-weight: bold;
+}
+
+#panel.macos-menubar-panel .panel-button.macos-menubar-logo-button {
+    -natural-hpadding: 12px;
+    -minimum-hpadding: 8px;
+}
+
+.macos-menubar-logo {
+    icon-size: 16px;
+}
+
+/* Menus: dark, compact, accent-highlighted rows, no pointer arrow. */
+.macos-menubar-menu {
+    -arrow-rise: 0px;
+    -arrow-base: 0px;
+    -arrow-border-radius: 0px;
+    -boxpointer-gap: 3px;
+}
+
+.macos-menubar-menu .popup-menu-content {
+    background-color: rgba(34, 34, 40, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    border-radius: 11px;
+    padding: 5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    min-width: 15em;
+}
+
+.macos-menubar-menu .popup-menu-item {
+    color: rgba(255, 255, 255, 0.93);
+    border-radius: 6px;
+    padding: 4px 10px;
+    spacing: 8px;
+    font-weight: normal;
+    transition-duration: 80ms;
+}
+
+.macos-menubar-menu .popup-menu-item:hover,
+.macos-menubar-menu .popup-menu-item:focus,
+.macos-menubar-menu .popup-menu-item:selected,
+.macos-menubar-menu .popup-menu-item:active {
+    color: #ffffff;
+    background-color: -st-accent-color;
+}
+
+.macos-menubar-menu .popup-menu-item:insensitive {
+    color: rgba(255, 255, 255, 0.32);
+    background-color: transparent;
+}
+
+.macos-menubar-menu .popup-separator-menu-item {
+    padding: 3px 10px;
+    background-color: transparent;
+}
+
+.macos-menubar-menu .popup-separator-menu-item .popup-separator-menu-item-separator {
+    background-color: rgba(255, 255, 255, 0.11);
+}
+
+/* The app menu's "Open Windows" heading. */
+.macos-menubar-menu .popup-separator-menu-item StLabel {
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 8.5pt;
+    font-weight: bold;
+}
+
+.macos-menubar-menu .popup-sub-menu {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: none;
+    border-radius: 7px;
+    margin: 2px 0;
+}
+
+.macos-menubar-menu .popup-sub-menu .popup-menu-item {
+    color: rgba(255, 255, 255, 0.93);
+    border-radius: 6px;
+}
+
+.macos-menubar-menu .popup-sub-menu .popup-menu-item:hover,
+.macos-menubar-menu .popup-sub-menu .popup-menu-item:focus {
+    color: #ffffff;
+    background-color: -st-accent-color;
+}
+
+.macos-menubar-menu .popup-menu-item:checked {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.macos-menubar-menu .popup-menu-ornament,
+.macos-menubar-menu .popup-menu-arrow {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.macos-menubar-shortcut {
+    color: rgba(255, 255, 255, 0.42);
+    padding-left: 24px;
+}
+
+.macos-menubar-menu .popup-menu-item:hover .macos-menubar-shortcut,
+.macos-menubar-menu .popup-menu-item:focus .macos-menubar-shortcut {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* About This Computer */
+.modal-dialog.macos-about {
+    background-gradient-direction: vertical;
+    background-gradient-start: rgba(48, 48, 56, 0.98);
+    background-gradient-end: rgba(30, 30, 36, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 20px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+    color: #ffffff;
+    padding: 26px 30px 22px 30px;
+    min-width: 25em;
+}
+
+.macos-about .modal-dialog-content-box {
+    max-width: 34em;
+    padding-top: 0;
+}
+
+.macos-about-box {
+    spacing: 4px;
+}
+
+.macos-about-logo {
+    margin-bottom: 14px;
+    icon-shadow: 0 8px 18px rgba(0, 0, 0, 0.45);
+}
+
+.macos-about-title {
+    font-size: 21pt;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.macos-about-subtitle {
+    font-size: 10pt;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 16px;
+}
+
+.macos-about-table {
+    spacing-rows: 6px;
+    spacing-columns: 12px;
+}
+
+.macos-about-key {
+    font-size: 10pt;
+    color: rgba(255, 255, 255, 0.92);
+    font-weight: 600;
+}
+
+.macos-about-value {
+    font-size: 10pt;
+    color: rgba(255, 255, 255, 0.6);
+    max-width: 24em;
+}
+
+.macos-about-footer {
+    font-size: 8pt;
+    color: rgba(255, 255, 255, 0.32);
+    margin-top: 18px;
+}
+
+.macos-about .modal-dialog-button-box {
+    spacing: 10px;
+    padding-top: 14px;
+}
+
+.macos-about .modal-dialog-button-box .modal-dialog-button {
+    background-color: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 7px 18px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.macos-about .modal-dialog-button-box .modal-dialog-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.macos-about .modal-dialog-button-box .modal-dialog-button:default {
+    background-color: -st-accent-color;
+}
+
+.macos-about .modal-dialog-button-box .modal-dialog-button:default:hover {
+    background-color: st-lighten(-st-accent-color, 8%);
+}
+
+/* Control Center: GNOME's quick settings as macOS draws them. Frosted glass
+ * (laid underneath from extension.js) behind a light tint, every control in
+ * its own rounded module, and toggles that light up only their round icon. */
+.macos-control-center .popup-menu-boxpointer {
+    -arrow-rise: 0px;
+    -boxpointer-gap: 5px;
+}
+
+/* Under the glass. St draws no shadow for a see-through widget, so it has
+ * a background; the glass covers all of it but the shadow. */
+.macos-control-center-shadow {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 22px;
+    box-shadow: 0 12px 36px 0 rgba(0, 0, 0, 0.75);
+}
+
+/* border-radius must match CONTROL_CENTER_RADIUS in extension.js. */
+.macos-control-center .quick-settings {
+    background-gradient-direction: vertical;
+    background-gradient-start: rgba(48, 48, 56, 0.40);
+    background-gradient-end: rgba(26, 26, 32, 0.52);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 22px;
+    padding: 12px;
+    color: #ffffff;
+    box-shadow: none;
+}
+
+.macos-control-center .quick-settings-grid {
+    spacing-rows: 10px;
+    spacing-columns: 10px;
+}
+
+/* Modules: toggles, sliders and the system row all sit on the same frosted
+ * tile, catching a little light along the top edge. */
+.macos-control-center .quick-toggle,
+.macos-control-center .quick-toggle-has-menu,
+.macos-control-center .quick-slider,
+.macos-control-center .quick-settings-system-item {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.09);
+    border-radius: 16px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+    transition-duration: 140ms;
+}
+
+.macos-control-center .quick-toggle,
+.macos-control-center .quick-toggle-has-menu {
+    min-height: 3.5em;
+}
+
+/* macOS keeps an active module grey; only its icon turns blue. */
+.macos-control-center .quick-toggle:checked,
+.macos-control-center .quick-toggle:focus:checked,
+.macos-control-center .quick-toggle-has-menu:checked {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.11);
+}
+
+.macos-control-center .quick-toggle:hover,
+.macos-control-center .quick-toggle:checked:hover,
+.macos-control-center .quick-toggle-has-menu:hover,
+.macos-control-center .quick-toggle-has-menu:checked:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.macos-control-center .quick-toggle:active,
+.macos-control-center .quick-toggle:checked:active {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.macos-control-center .quick-toggle:insensitive {
+    color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.macos-control-center .quick-toggle > StBoxLayout {
+    spacing: 10px;
+    padding: 0 10px;
+}
+
+.macos-control-center .quick-toggle:ltr > StBoxLayout {
+    padding-left: 9px;
+}
+
+.macos-control-center .quick-toggle:rtl > StBoxLayout {
+    padding-right: 9px;
+}
+
+/* The round icon well. */
+.macos-control-center .quick-toggle .quick-toggle-icon {
+    icon-size: 15px;
+    padding: 8px;
+    border-radius: 999px;
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.16);
+    transition-duration: 160ms;
+}
+
+.macos-control-center .quick-toggle:checked .quick-toggle-icon {
+    color: #ffffff;
+    background-color: -st-accent-color;
+}
+
+.macos-control-center .quick-toggle .quick-toggle-title {
+    font-weight: 600;
+    font-size: 0.95em;
+}
+
+.macos-control-center .quick-toggle .quick-toggle-subtitle {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 0.8em;
+}
+
+/* A toggle with a menu is one module: its inner toggle and the chevron are
+ * see-through, with no divider between them. */
+.macos-control-center .quick-toggle-has-menu .quick-toggle,
+.macos-control-center .quick-toggle-has-menu .quick-toggle:checked,
+.macos-control-center .quick-toggle-has-menu .quick-toggle:hover,
+.macos-control-center .quick-toggle-has-menu .quick-toggle:checked:hover,
+.macos-control-center .quick-toggle-has-menu .quick-toggle:active,
+.macos-control-center .quick-toggle-has-menu .quick-toggle:checked:active,
+.macos-control-center .quick-toggle-has-menu .quick-toggle:focus:checked,
+.macos-control-center .quick-toggle-has-menu .quick-toggle:insensitive {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.macos-control-center .quick-toggle-has-menu .quick-toggle:ltr {
+    border-radius: 16px 0 0 16px;
+}
+
+.macos-control-center .quick-toggle-has-menu .quick-toggle:rtl {
+    border-radius: 0 16px 16px 0;
+}
+
+.macos-control-center .quick-toggle-has-menu .quick-toggle:ltr:last-child,
+.macos-control-center .quick-toggle-has-menu .quick-toggle:rtl:last-child {
+    border-radius: 16px;
+}
+
+.macos-control-center .quick-toggle-has-menu .quick-toggle-separator {
+    width: 0;
+    background-color: transparent;
+}
+
+.macos-control-center .quick-toggle-has-menu .quick-toggle-menu-button,
+.macos-control-center .quick-toggle-has-menu .quick-toggle-menu-button:checked {
+    color: rgba(255, 255, 255, 0.5);
+    background-color: transparent;
+    padding: 0.4em 0.6em;
+}
+
+.macos-control-center .quick-toggle-has-menu .quick-toggle-menu-button:ltr {
+    border-radius: 0 16px 16px 0;
+}
+
+.macos-control-center .quick-toggle-has-menu .quick-toggle-menu-button:rtl {
+    border-radius: 16px 0 0 16px;
+}
+
+.macos-control-center .quick-toggle-has-menu .quick-toggle-menu-button:hover,
+.macos-control-center .quick-toggle-has-menu .quick-toggle-menu-button:checked:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.macos-control-center .quick-toggle-has-menu .quick-toggle-menu-button:active,
+.macos-control-center .quick-toggle-has-menu .quick-toggle-menu-button:checked:active {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.14);
+}
+
+/* Sliders: macOS's fat white bars. */
+.macos-control-center .quick-slider {
+    padding: 7px 8px;
+}
+
+.macos-control-center .quick-slider > StBoxLayout {
+    spacing: 4px;
+}
+
+.macos-control-center .quick-slider .icon-button {
+    color: rgba(255, 255, 255, 0.85);
+    background-color: transparent;
+    padding: 6px;
+}
+
+.macos-control-center .quick-slider .icon-button:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.macos-control-center .quick-slider .slider-bin {
+    padding: 4px 6px;
+}
+
+.macos-control-center .quick-slider .slider-bin:focus {
+    background-color: rgba(255, 255, 255, 0.06);
+}
+
+.macos-control-center .slider {
+    color: #ffffff;
+    -barlevel-height: 22px;
+    -barlevel-background-color: rgba(255, 255, 255, 0.13);
+    -barlevel-active-background-color: rgba(255, 255, 255, 0.92);
+    -barlevel-overdrive-color: #ff9f0a;
+    -slider-handle-radius: 11px;
+}
+
+.macos-control-center .slider:hover {
+    color: #ffffff;
+    -barlevel-active-background-color: #ffffff;
+}
+
+/* The battery, screenshot, settings, lock and power row. */
+.macos-control-center .quick-settings-system-item {
+    padding: 6px;
+}
+
+.macos-control-center .quick-settings-system-item > StBoxLayout {
+    spacing: 6px;
+}
+
+.macos-control-center .quick-settings-system-item .icon-button {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    padding: 9px;
+}
+
+.macos-control-center .quick-settings-system-item .icon-button:hover {
+    background-color: rgba(255, 255, 255, 0.18);
+}
+
+.macos-control-center .quick-settings-system-item .icon-button:active,
+.macos-control-center .quick-settings-system-item .icon-button:checked {
+    background-color: rgba(255, 255, 255, 0.26);
+}
+
+.macos-control-center .quick-settings-system-item .power-item,
+.macos-control-center .quick-settings-system-item .power-item:hover,
+.macos-control-center .quick-settings-system-item .power-item:insensitive {
+    background-color: transparent;
+    box-shadow: none;
+    min-height: 0;
+}
+
+.macos-control-center .quick-settings-system-item .power-item .quick-toggle-icon {
+    background-color: transparent;
+    padding: 4px;
+}
+
+.macos-control-center .background-apps-quick-toggle,
+.macos-control-center .background-apps-quick-toggle:hover {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+/* A module's menu (Wi-Fi networks, Bluetooth devices, sound outputs…)
+ * unfolds as a darker card. */
+.macos-control-center .quick-toggle-menu {
+    color: #ffffff;
+    background-color: rgba(38, 38, 44, 0.97);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    padding: 10px;
+    margin: 10px 0 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.macos-control-center .quick-toggle-menu .header {
+    padding: 2px 4px 10px 4px;
+    spacing-columns: 10px;
+}
+
+.macos-control-center .quick-toggle-menu .header .icon {
+    icon-size: 18px;
+    padding: 8px;
+    background-color: rgba(255, 255, 255, 0.16);
+}
+
+.macos-control-center .quick-toggle-menu .header .icon.active {
+    color: #ffffff;
+    background-color: -st-accent-color;
+}
+
+.macos-control-center .quick-toggle-menu .header .title {
+    font-size: 1.1em;
+    font-weight: 700;
+}
+
+.macos-control-center .quick-toggle-menu .header .subtitle {
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: normal;
+}
+
+.macos-control-center .quick-toggle-menu .popup-menu-item {
+    color: rgba(255, 255, 255, 0.93);
+    border-radius: 8px;
+    padding: 6px 10px;
+    spacing: 10px;
+}
+
+.macos-control-center .quick-toggle-menu .popup-menu-item:hover,
+.macos-control-center .quick-toggle-menu .popup-menu-item:focus,
+.macos-control-center .quick-toggle-menu .popup-menu-item:selected {
+    color: #ffffff;
+    background-color: -st-accent-color;
+}
+
+.macos-control-center .quick-toggle-menu .popup-menu-item:checked {
+    border-radius: 8px !important;
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.macos-control-center .quick-toggle-menu .popup-menu-item:insensitive {
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.macos-control-center .quick-toggle-menu .popup-sub-menu {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: none;
+    border-radius: 8px;
+}
+
+.macos-control-center .quick-toggle-menu .popup-sub-menu .popup-menu-item {
+    border-radius: 8px;
+}
+
+.macos-control-center .quick-toggle-menu .popup-separator-menu-item {
+    padding: 3px 10px;
+}
+
+.macos-control-center .quick-toggle-menu .popup-separator-menu-item .popup-separator-menu-item-separator {
+    background-color: rgba(255, 255, 255, 0.11);
+}
+
+.macos-control-center .quick-toggle-menu .toggle-switch:checked {
+    background: -st-accent-color;
+}

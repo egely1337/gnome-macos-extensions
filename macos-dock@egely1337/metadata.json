@@ -1,0 +1,9 @@
+{
+  "uuid": "macos-dock@egely1337",
+  "name": "macOS Dock",
+  "description": "A floating macOS-style dock: hover magnification, running indicators, launch bounce, app name tooltips, minimized window previews, a Trash, and a Launchpad with drifting aurora light, rippling icons and swipeable pages. Shrinks out of the way of maximized windows and reports icon positions so minimize animations fly into the right spot.",
+  "shell-version": [
+    "50"
+  ],
+  "version": 1
+}

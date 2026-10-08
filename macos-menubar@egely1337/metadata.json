@@ -1,0 +1,7 @@
+{
+  "uuid": "macos-menubar@egely1337",
+  "name": "macOS Menu Bar",
+  "description": "Turns the top bar into a frosted-glass macOS menu bar: the focused app's name and menu, a Window menu, the clock in the middle, a Spotlight button, and GNOME's quick settings restyled as a frosted macOS Control Center.",
+  "shell-version": ["50"],
+  "version": 1
+}

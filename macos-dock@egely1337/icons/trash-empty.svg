@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#aeb4bf"/>
+      <stop offset="0.3" stop-color="#f3f4f7"/>
+      <stop offset="0.6" stop-color="#e4e7ec"/>
+      <stop offset="1" stop-color="#9fa6b2"/>
+    </linearGradient>
+    <linearGradient id="shade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#000000" stop-opacity="0.12"/>
+      <stop offset="0.25" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0.2"/>
+    </linearGradient>
+    <pattern id="mesh" width="4.5" height="4.5" patternUnits="userSpaceOnUse">
+      <circle cx="2.25" cy="2.25" r="1.15" fill="#4b5260" fill-opacity="0.42"/>
+    </pattern>
+    <linearGradient id="rim" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#b3b9c4"/>
+    </linearGradient>
+    <radialGradient id="hole" cx="0.5" cy="0.3" r="0.75">
+      <stop offset="0" stop-color="#555c68"/>
+      <stop offset="1" stop-color="#262a31"/>
+    </radialGradient>
+  </defs>
+  <ellipse cx="64" cy="115" rx="32" ry="5" fill="#000000" fill-opacity="0.28"/>
+  <path d="M 26 26 L 102 26 L 94.5 107 Q 93.8 114 87 114 L 41 114 Q 34.2 114 33.5 107 Z" fill="url(#body)"/>
+  <path d="M 26 26 L 102 26 L 94.5 107 Q 93.8 114 87 114 L 41 114 Q 34.2 114 33.5 107 Z" fill="url(#mesh)"/>
+  <line x1="36.9" y1="31" x2="42.6" y2="111" stroke="#ffffff" stroke-opacity="0.55" stroke-width="1.6"/>
+  <line x1="38.3" y1="31" x2="43.8" y2="111" stroke="#6b7280" stroke-opacity="0.35" stroke-width="1"/>
+  <line x1="47.7" y1="31" x2="51.1" y2="111" stroke="#ffffff" stroke-opacity="0.55" stroke-width="1.6"/>
+  <line x1="49.1" y1="31" x2="52.3" y2="111" stroke="#6b7280" stroke-opacity="0.35" stroke-width="1"/>
+  <line x1="58.6" y1="31" x2="59.7" y2="111" stroke="#ffffff" stroke-opacity="0.55" stroke-width="1.6"/>
+  <line x1="60.0" y1="31" x2="60.9" y2="111" stroke="#6b7280" stroke-opacity="0.35" stroke-width="1"/>
+  <line x1="69.4" y1="31" x2="68.3" y2="111" stroke="#ffffff" stroke-opacity="0.55" stroke-width="1.6"/>
+  <line x1="70.8" y1="31" x2="69.5" y2="111" stroke="#6b7280" stroke-opacity="0.35" stroke-width="1"/>
+  <line x1="80.3" y1="31" x2="76.9" y2="111" stroke="#ffffff" stroke-opacity="0.55" stroke-width="1.6"/>
+  <line x1="81.7" y1="31" x2="78.1" y2="111" stroke="#6b7280" stroke-opacity="0.35" stroke-width="1"/>
+  <line x1="91.1" y1="31" x2="85.4" y2="111" stroke="#ffffff" stroke-opacity="0.55" stroke-width="1.6"/>
+  <line x1="92.5" y1="31" x2="86.6" y2="111" stroke="#6b7280" stroke-opacity="0.35" stroke-width="1"/>
+  <path d="M 26 26 L 102 26 L 94.5 107 Q 93.8 114 87 114 L 41 114 Q 34.2 114 33.5 107 Z" fill="url(#shade)"/>
+  <path d="M 26 26 L 102 26 L 94.5 107 Q 93.8 114 87 114 L 41 114 Q 34.2 114 33.5 107 Z" fill="none" stroke="#6f7683" stroke-opacity="0.7" stroke-width="1"/>
+  <ellipse cx="64" cy="26" rx="40" ry="8" fill="url(#rim)" stroke="#8a919e" stroke-width="1"/>
+  <ellipse cx="64" cy="26" rx="35" ry="5.5" fill="url(#hole)"/>
+  <path d="M 24 26 A 40 8 0 0 0 104 26 L 99 26 A 35 5.5 0 0 1 29 26 Z" fill="url(#rim)" stroke="#8a919e" stroke-width="0.8"/>
+</svg>
