@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.mandarin-menubar" path="/org/gnome/shell/extensions/mandarin-menubar/">
+    <key name="show-spotlight-button" type="b">
+      <default>true</default>
+      <summary>Show the Spotlight button in the menu bar</summary>
+    </key>
+    <key name="show-window-menu" type="b">
+      <default>true</default>
+      <summary>Show the Window menu next to the application menu</summary>
+    </key>
+  </schema>
+</schemalist>

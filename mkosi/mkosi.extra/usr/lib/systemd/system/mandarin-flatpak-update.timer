@@ -1,0 +1,11 @@
+[Unit]
+Description=Flatpak uygulamalarını günlük güncelle
+
+[Timer]
+OnBootSec=30min
+OnCalendar=daily
+RandomizedDelaySec=2h
+Persistent=yes
+
+[Install]
+WantedBy=timers.target

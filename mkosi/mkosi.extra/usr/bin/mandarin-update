@@ -1,0 +1,86 @@
+#!/bin/bash
+# mandarinOS sistem güncellemeleri (A/B). Uygulamalar Flatpak ile, Bazaar'dan
+# güncellenir; bu araç yalnızca işletim sistemi imajıyla ilgilenir.
+set -euo pipefail
+
+usage() {
+    cat <<USAGE
+Kullanım: mandarin-update [KOMUT]
+
+  status      Çalışan sürümü, yuvaları ve önyükleme girişlerini göster (varsayılan)
+  check       Yeni sürüm var mı bak
+  update      Yeni sürümü boştaki yuvaya indir ve kur
+  reboot      Kurulmuş yeni sürüm varsa yeniden başlat
+  rollback    Bir sonraki ve sonraki açılışlarda önceki sürümü kullan
+  apps        Flatpak uygulamalarını güncelle
+USAGE
+}
+
+need_root() {
+    if [[ $EUID -ne 0 ]]; then
+        exec run0 "$0" "$@"
+    fi
+}
+
+current_version() {
+    . /usr/lib/os-release
+    echo "${IMAGE_VERSION:-bilinmiyor}"
+}
+
+cmd=${1:-status}
+case "$cmd" in
+    status)
+        need_root "$@"
+        echo "Çalışan sürüm: $(current_version)"
+        echo
+        systemd-sysupdate list || true
+        echo
+        bootctl list --no-pager 2>/dev/null | grep -E 'title|id|version|tries' || true
+        ;;
+    check)
+        need_root "$@"
+        if systemd-sysupdate check-new; then
+            echo "Yeni sürüm mevcut. Kurmak için: mandarin-update update"
+        else
+            echo "Sistem güncel ($(current_version))."
+        fi
+        ;;
+    update)
+        need_root "$@"
+        systemd-sysupdate update
+        /usr/lib/mandarin/notify-update
+        if systemd-sysupdate pending >/dev/null 2>&1; then
+            echo "Yeni sürüm kuruldu. Geçmek için yeniden başlatın: mandarin-update reboot"
+        fi
+        ;;
+    reboot)
+        need_root "$@"
+        systemd-sysupdate reboot
+        ;;
+    rollback)
+        need_root "$@"
+        # Çalışan sürüm dışındaki en yeni mandarinOS UKI'sini varsayılan yap.
+        # UKI profilleri (kurulum, fabrika ayarları) "<uki>@<profil>" kimliğiyle
+        # listelenir; onlar atlanır.
+        booted=$(bootctl list --json=short | jq -r '.[] | select(.isSelected) | .id')
+        target=$(bootctl list --json=short | jq -r --arg b "$booted" \
+            '[.[] | select(.id != $b and (.id | startswith("mandarinOS_")) and (.id | contains("@") | not))] | sort_by(.version) | last | .id // empty')
+        if [[ -z $target ]]; then
+            echo "Geri dönülecek başka bir sürüm yok." >&2
+            exit 1
+        fi
+        bootctl set-default "$target"
+        echo "Varsayılan önyükleme girişi: $target"
+        echo "Yeniden başlattığınızda önceki sürüm açılacak. Geri almak için: bootctl set-default \"\""
+        ;;
+    apps)
+        flatpak update -y
+        ;;
+    -h|--help|help)
+        usage
+        ;;
+    *)
+        usage >&2
+        exit 2
+        ;;
+esac

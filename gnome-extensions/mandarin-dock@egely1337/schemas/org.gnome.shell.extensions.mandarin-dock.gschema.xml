@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.mandarin-dock" path="/org/gnome/shell/extensions/mandarin-dock/">
+    <key name="icon-size" type="i">
+      <range min="32" max="80"/>
+      <default>60</default>
+      <summary>Resting size of the dock icons, in pixels</summary>
+    </key>
+    <key name="magnification" type="b">
+      <default>true</default>
+      <summary>Magnify icons under the pointer</summary>
+    </key>
+    <key name="magnification-scale" type="d">
+      <range min="1.2" max="2.5"/>
+      <default>1.85</default>
+      <summary>How large magnified icons get, relative to their resting size</summary>
+    </key>
+    <key name="compact-when-maximized" type="b">
+      <default>true</default>
+      <summary>Shrink the dock while a maximized window shares the screen</summary>
+    </key>
+    <key name="minimize-into-app" type="b">
+      <default>false</default>
+      <summary>Minimize windows into their application icon instead of a preview</summary>
+    </key>
+    <key name="show-trash" type="b">
+      <default>true</default>
+      <summary>Show the Trash at the end of the dock</summary>
+    </key>
+    <key name="bounce-on-launch" type="b">
+      <default>true</default>
+      <summary>Bounce icons while their application starts</summary>
+    </key>
+    <key name="pointer-glow" type="b">
+      <default>true</default>
+      <summary>Light up the glass under the pointer</summary>
+    </key>
+    <key name="super-opens-launchpad" type="b">
+      <default>true</default>
+      <summary>Tapping Super opens Launchpad instead of the overview</summary>
+    </key>
+  </schema>
+</schemalist>

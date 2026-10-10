@@ -1,0 +1,14 @@
+#!/bin/bash
+# systemd-sysupdate.service sonrası çalışır. Boştaki yuvaya daha yeni bir sürüm
+# yazıldıysa /run/mandarin/update-pending dosyasını bırakır; oturumdaki
+# mandarin-update-notify.path bunu görüp kullanıcıya bildirim gösterir.
+set -u
+
+mkdir -p /run/mandarin
+if systemd-sysupdate pending >/dev/null 2>&1; then
+    systemd-sysupdate list --json=short 2>/dev/null \
+        | jq -r '[.all[]? | select(.installed == true)] | max_by(.version)?.version // empty' \
+        > /run/mandarin/update-pending.tmp || true
+    mv /run/mandarin/update-pending.tmp /run/mandarin/update-pending
+fi
+exit 0

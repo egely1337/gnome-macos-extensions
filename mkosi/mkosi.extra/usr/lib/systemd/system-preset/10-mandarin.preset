@@ -1,0 +1,24 @@
+enable gdm.service
+enable NetworkManager.service
+enable NetworkManager-wait-online.service
+enable ModemManager.service
+enable bluetooth.service
+enable cups.socket
+enable power-profiles-daemon.service
+enable systemd-resolved.service
+enable systemd-timesyncd.service
+enable systemd-oomd.service
+enable fwupd-refresh.timer
+
+# A/B güncellemeleri ve açılış sayacı
+enable systemd-sysupdate.timer
+enable systemd-boot-check-no-failures.service
+
+# Uygulamalar
+enable mandarin-flatpak-preinstall.service
+enable mandarin-flatpak-update.timer
+
+# systemd-networkd NetworkManager ile çakışmasın
+disable systemd-networkd.service
+disable systemd-networkd-wait-online.service
+disable sshd.service

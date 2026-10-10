@@ -1,0 +1,154 @@
+#!/bin/bash
+# İmajın içinde (chroot) çalışır: mandarinOS kimliği, masaüstü bileşenleri ve
+# güncelleme tanımları. Depo kökü /work/src'dedir (BuildSources=..).
+set -euo pipefail
+
+src=/work/src
+
+# --- Kimlik -----------------------------------------------------------------
+# ID_LIKE=arch: Arch'ı tanıyan araçlar çalışmaya devam eder.
+# IMAGE_ID/IMAGE_VERSION'ı mkosi bu betikten sonra ekler.
+cat >/usr/lib/os-release <<OSR
+NAME="mandarinOS"
+PRETTY_NAME="mandarinOS"
+ID=mandarinos
+ID_LIKE=arch
+BUILD_ID=rolling
+ANSI_COLOR="38;2;255;140;0"
+HOME_URL="https://github.com/egely1337/mandarinOS"
+LOGO=mandarinos
+DEFAULT_HOSTNAME="mandarin"
+OSR
+
+cat >/usr/lib/issue <<'ISSUE'
+\e[38;2;255;140;0mmandarinOS\e[0m \r (\l)
+
+ISSUE
+
+install -Dm644 "$src/branding/mandarinos.svg" /usr/share/icons/hicolor/scalable/apps/mandarinos.svg
+install -Dm644 "$src/branding/mandarinos.svg" /usr/share/pixmaps/mandarinos.svg
+install -Dm644 "$src/branding/mandarinos-symbolic.svg" /usr/share/icons/hicolor/symbolic/apps/mandarinos-symbolic.svg
+install -Dm644 "$src/branding/mandarinOS-logo-wide.png" /usr/share/pixmaps/mandarinos-logo-wide.png
+install -d /usr/share/mandarinos
+cp -a "$src/branding" /usr/share/mandarinos/branding
+
+# --- GNOME Shell eklentileri -------------------------------------------------
+extensions=()
+for dir in "$src"/gnome-extensions/*@*/; do
+    uuid=$(basename "$dir")
+    dest=/usr/share/gnome-shell/extensions/$uuid
+    rm -rf "$dest"
+    cp -a "$dir" "$dest"
+    rm -f "$dest/schemas/gschemas.compiled"
+    if [[ -d $dest/schemas ]]; then
+        glib-compile-schemas "$dest/schemas"
+        cp "$dest"/schemas/*.gschema.xml /usr/share/glib-2.0/schemas/
+    fi
+    extensions+=("'$uuid'")
+done
+
+# --- Sistem Ayarları ---------------------------------------------------------
+# Uygulama ROOT olarak bir üst dizini kullanır (ROOT/branding, ROOT/<uuid>).
+install -d /usr/share/mandarinos/settings
+install -m644 "$src"/packages/mandarin-settings/mandarin-settings.js \
+              "$src"/packages/mandarin-settings/style.css \
+              /usr/share/mandarinos/settings/
+cat >/usr/bin/mandarin-settings <<'RUN'
+#!/bin/sh
+exec gjs -m /usr/share/mandarinos/settings/mandarin-settings.js "$@"
+RUN
+chmod 755 /usr/bin/mandarin-settings
+sed -e 's|@EXEC@|mandarin-settings|' -e 's|@ICON@|mandarinos|' \
+    "$src"/packages/mandarin-settings/io.github.egely1337.MandarinSettings.desktop.in \
+    >/usr/share/applications/io.github.egely1337.MandarinSettings.desktop
+
+# --- Varsayılan GNOME ayarları -------------------------------------------------
+enabled=$(IFS=,; echo "${extensions[*]}")
+cat >/usr/share/glib-2.0/schemas/90_mandarinos.gschema.override <<OVR
+[org.gnome.shell]
+enabled-extensions=[$enabled]
+favorite-apps=['org.mozilla.firefox.desktop', 'org.gnome.Nautilus.desktop', 'io.github.kolunmi.Bazaar.desktop', 'org.gnome.Console.desktop', 'io.github.egely1337.MandarinSettings.desktop']
+
+[org.gnome.desktop.wm.preferences]
+button-layout='close,minimize,maximize:'
+
+[org.gnome.desktop.interface]
+color-scheme='prefer-dark'
+OVR
+glib-compile-schemas /usr/share/glib-2.0/schemas
+gtk-update-icon-cache -qtf /usr/share/icons/hicolor || true
+update-desktop-database -q /usr/share/applications || true
+
+# --- PAM / kabuk temizliği -----------------------------------------------------
+# Kullanıcılar gnome-initial-setup ile oluşturulur; tekerlek grubu sudo alır.
+install -Dm440 /dev/stdin /etc/sudoers.d/10-wheel <<'SUDO'
+%wheel ALL=(ALL:ALL) ALL
+SUDO
+
+# pacman'ın yerel veritabanı /usr'a taşınır (mkosi.postinst); sorgular çalışsın.
+sed -i 's|^#\?DBPath.*|DBPath = /usr/lib/pacman/|' /etc/pacman.conf
+
+# --- Güncelleme kaynağı (systemd-sysupdate) ------------------------------------
+# MANDARIN_UPDATE_URL, mkosi.local.conf'taki Environment= ile verilir. Boşsa
+# imaj internetten güncelleme almaz; yalnızca "mkosi sysupdate" kullanılabilir.
+url=${MANDARIN_UPDATE_URL:-}
+defs=/usr/lib/sysupdate.d
+rm -rf "$defs"
+if [[ -n $url ]]; then
+    install -d "$defs"
+    verify=yes
+    if [[ -f $src/mkosi/keys/sysupdate-pubring.gpg ]]; then
+        install -Dm644 "$src/mkosi/keys/sysupdate-pubring.gpg" /usr/lib/systemd/import-pubring.gpg
+    else
+        echo "UYARI: mkosi/keys/sysupdate-pubring.gpg yok, SHA256SUMS imzası doğrulanmayacak." >&2
+        echo "       (/usr yine de dm-verity imzasıyla korunur.)" >&2
+        verify=no
+    fi
+
+    transfer() { # <dosya> <kaynak deseni> <hedef deseni> <bölüm türü>
+        cat >"$defs/$1" <<TR
+[Transfer]
+ProtectVersion=%A
+Verify=$verify
+
+[Source]
+Type=url-file
+Path=$url
+MatchPattern=$2
+
+[Target]
+Type=partition
+Path=auto
+MatchPattern=$3
+MatchPartitionType=$4
+PartitionFlags=0
+ReadOnly=1
+TR
+    }
+    transfer 10-usr-verity-sig.transfer '%M_@v_%a.usr-%a-verity-sig.@u.raw' '%M_@v_verity_sig' usr-verity-sig
+    transfer 11-usr-verity.transfer     '%M_@v_%a.usr-%a-verity.@u.raw'     '%M_@v_verity'     usr-verity
+    transfer 12-usr.transfer            '%M_@v_%a.usr-%a.@u.raw'            '%M_@v'            usr
+
+    cat >"$defs/20-uki.transfer" <<TR
+[Transfer]
+ProtectVersion=%A
+Verify=$verify
+
+[Source]
+Type=url-file
+Path=$url
+MatchPattern=%M_@v_%a.efi
+
+[Target]
+Type=regular-file
+Path=/EFI/Linux
+PathRelativeTo=boot
+MatchPattern=%M_@v_%a+@l-@d.efi \\
+             %M_@v_%a+@l.efi \\
+             %M_@v_%a.efi
+Mode=0600
+TriesLeft=3
+TriesDone=0
+InstancesMax=2
+TR
+fi

@@ -1,0 +1,34 @@
+#!/bin/bash
+# Son adım: /etc ve /var'ın fabrika kopyaları /usr'a alınır. İmaja yalnızca
+# /usr girer; kök bölümü ilk açılışta boş oluşturulur.
+#   /etc -> /usr/share/factory/etc  (initrd'de overlay'in alt katmanı)
+#   /var -> /usr/share/factory/var  (tmpfiles "C" ile eksikse kopyalanır)
+set -euo pipefail
+
+factory=$BUILDROOT/usr/share/factory
+mkdir -p "$factory"
+
+rm -rf "$factory/etc"
+cp -a "$BUILDROOT/etc" "$factory/etc"
+# Her makine kendi kimliğini üretsin; ilk açılış (ConditionFirstBoot) tetiklensin.
+rm -f "$factory/etc/machine-id" "$factory/etc/hostname" \
+      "$factory/etc/localtime.bak" "$factory/etc/.updated"
+
+# /var içinde paketlerin bıraktığı dizinler (gdm, AccountsService, polkit...).
+rm -rf "$factory/var"
+mkdir -p "$factory/var"
+tmpfiles=$BUILDROOT/usr/lib/tmpfiles.d/00-mandarin-factory-var.conf
+echo "# mkosi.finalize tarafından üretildi: /var'ı fabrika kopyasından doldur." >"$tmpfiles"
+for top in lib spool db opt games; do
+    [[ -d $BUILDROOT/var/$top ]] || continue
+    for entry in "$BUILDROOT/var/$top"/*; do
+        [[ -e $entry ]] || continue
+        name=${entry#"$BUILDROOT"}
+        case "$name" in
+            /var/lib/pacman|/var/lib/systemd|/var/lib/machines|/var/lib/portables) continue ;;
+        esac
+        mkdir -p "$factory$(dirname "$name")"
+        cp -a "$entry" "$factory$name"
+        echo "C $name - - - -" >>"$tmpfiles"
+    done
+done

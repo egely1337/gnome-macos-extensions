@@ -1,0 +1,10 @@
+{
+  "uuid": "mandarin-menubar@egely1337",
+  "name": "mandarinOS Menu Bar",
+  "description": "Turns the top bar into mandarinOS's frosted-glass menu bar: the mandarin menu, the focused app's name and menu, a Window menu, the clock in the middle, a Spotlight button, and GNOME's quick settings restyled as a frosted Control Center.",
+  "shell-version": [
+    "50"
+  ],
+  "version": 1,
+  "settings-schema": "org.gnome.shell.extensions.mandarin-menubar"
+}

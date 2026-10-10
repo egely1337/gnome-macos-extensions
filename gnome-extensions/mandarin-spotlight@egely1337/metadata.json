@@ -1,0 +1,9 @@
+{
+  "uuid": "mandarin-spotlight@egely1337",
+  "name": "mandarinOS Spotlight",
+  "description": "mandarinOS's frosted-glass Spotlight search on Super+Space: apps, files, settings, calculator and anything else GNOME search providers offer.",
+  "shell-version": [
+    "50"
+  ],
+  "version": 1
+}

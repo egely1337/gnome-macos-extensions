@@ -1,0 +1,6 @@
+[Unit]
+Description=mandarinOS güncellemesi bildirimi
+
+[Service]
+Type=oneshot
+ExecStart=/usr/lib/mandarin/update-notify-user

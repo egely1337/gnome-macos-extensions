@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=Sistem Ayarları
+Name[en]=System Settings
+Comment=mandarinOS ayarları: Dock, menü çubuğu, Spotlight, görünüm
+Comment[en]=mandarinOS settings: Dock, menu bar, Spotlight, appearance
+Exec=@EXEC@
+Icon=@ICON@
+Categories=Settings;DesktopSettings;GTK;GNOME;
+Keywords=dock;menubar;spotlight;mandarinos;macos;appearance;wallpaper;görünüm;duvar kağıdı;
+StartupNotify=true
+DBusActivatable=false
+StartupWMClass=io.github.egely1337.MandarinSettings

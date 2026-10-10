@@ -1,0 +1,22 @@
+#!/bin/bash
+# /etc'yi, imajdaki fabrika kopyası (/usr/share/factory/etc, salt okunur) ile
+# kök bölümündeki yazılabilir bir katmanın birleşimi olarak bağlar.
+#
+# Kullanıcının değiştirmediği dosyalar her güncellemede yeni /usr'dan gelir;
+# değiştirdikleri katmanda kalır. Fabrika ayarlarına dönüş kök bölümünü
+# sildiğinde katman da gider ve /etc imajdaki haline döner.
+set -euo pipefail
+
+sysroot=/sysroot
+lower=$sysroot/usr/share/factory/etc
+state=$sysroot/var/lib/mandarin/etc-overlay
+
+if [[ ! -d $lower ]]; then
+    echo "mandarin: $lower yok, /etc katmanı kurulmuyor" >&2
+    exit 0
+fi
+
+mkdir -p "$state/upper" "$state/work" "$sysroot/etc"
+mount -t overlay mandarin-etc \
+    -o "lowerdir=$lower,upperdir=$state/upper,workdir=$state/work,redirect_dir=off,metacopy=off,index=off" \
+    "$sysroot/etc"

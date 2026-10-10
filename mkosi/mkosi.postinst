@@ -1,0 +1,11 @@
+#!/bin/bash
+# Ana makinede çalışır; $BUILDROOT imajın köküdür.
+set -euo pipefail
+
+# Kök bölümü ilk açılışta boş gelir; pacman veritabanını /usr'da tut ki
+# "pacman -Q" hangi paketlerin imajda olduğunu söyleyebilsin.
+if [[ -d $BUILDROOT/var/lib/pacman/local ]]; then
+    mkdir -p "$BUILDROOT/usr/lib/pacman"
+    rm -rf "$BUILDROOT/usr/lib/pacman/local"
+    mv "$BUILDROOT/var/lib/pacman/local" "$BUILDROOT/usr/lib/pacman/"
+fi

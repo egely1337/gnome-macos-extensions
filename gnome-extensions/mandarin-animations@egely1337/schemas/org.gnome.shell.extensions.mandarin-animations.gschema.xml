@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <enum id="org.gnome.shell.extensions.mandarin-animations.MinimizeEffect">
+    <value nick="genie" value="0"/>
+    <value nick="scale" value="1"/>
+  </enum>
+  <schema id="org.gnome.shell.extensions.mandarin-animations" path="/org/gnome/shell/extensions/mandarin-animations/">
+    <key name="minimize-effect" enum="org.gnome.shell.extensions.mandarin-animations.MinimizeEffect">
+      <default>'genie'</default>
+      <summary>How windows fly into the dock when minimized</summary>
+    </key>
+    <key name="open-close-animations" type="b">
+      <default>true</default>
+      <summary>Zoom windows in when they open and out when they close</summary>
+    </key>
+    <key name="speed" type="d">
+      <range min="0.5" max="2.0"/>
+      <default>1.0</default>
+      <summary>Animation speed; higher is faster</summary>
+    </key>
+  </schema>
+</schemalist>

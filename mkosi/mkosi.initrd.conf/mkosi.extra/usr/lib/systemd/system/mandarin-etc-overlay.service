@@ -1,0 +1,14 @@
+[Unit]
+Description=mandarinOS /etc katmanı
+DefaultDependencies=no
+ConditionPathExists=/etc/initrd-release
+RequiresMountsFor=/sysroot/usr
+After=sysroot.mount systemd-repart.service
+Before=initrd-fs.target
+OnFailure=emergency.target
+OnFailureJobMode=replace-irreversibly
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/lib/mandarin/etc-overlay

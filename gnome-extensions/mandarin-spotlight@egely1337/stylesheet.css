@@ -1,0 +1,110 @@
+/* Tint laid over the blurred glass, with the light inner hairline macOS
+ * draws around its materials. */
+.mandarin-spotlight {
+    background-color: rgba(36, 36, 40, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 16px;
+}
+
+/* Under the glass. St draws no shadow for a see-through widget, so it has
+ * a background; the glass covers all of it but the shadow. */
+.mandarin-spotlight-shadow {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 16px;
+    box-shadow: 0 16px 44px 0 rgba(0, 0, 0, 0.8);
+}
+
+.mandarin-spotlight-header {
+    padding: 12px 18px;
+    spacing: 12px;
+}
+
+.mandarin-spotlight-search-icon {
+    icon-size: 22px;
+    color: rgba(255, 255, 255, 0.62);
+}
+
+.mandarin-spotlight-entry,
+.mandarin-spotlight-entry:focus,
+.mandarin-spotlight-entry:hover {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 4px 0;
+    color: #ffffff;
+    caret-color: #ffffff;
+    selection-background-color: rgba(10, 132, 255, 0.85);
+    selected-color: #ffffff;
+    font-size: 19pt;
+    font-weight: 300;
+}
+
+.mandarin-spotlight-entry StLabel.hint-text {
+    color: rgba(255, 255, 255, 0.42);
+}
+
+.mandarin-spotlight-separator {
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.mandarin-spotlight-results {
+    padding: 4px 8px 10px 8px;
+}
+
+.mandarin-spotlight-section {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 8.5pt;
+    font-weight: bold;
+    padding: 10px 10px 4px 10px;
+}
+
+.mandarin-spotlight-row {
+    border-radius: 8px;
+    padding: 5px 10px;
+    background-color: transparent;
+    color: #ffffff;
+}
+
+.mandarin-spotlight-row.top-hit {
+    padding: 7px 10px;
+}
+
+.mandarin-spotlight-row:selected {
+    background-color: rgba(10, 132, 255, 0.9);
+}
+
+.mandarin-spotlight-row-box {
+    spacing: 12px;
+}
+
+.mandarin-spotlight-row-title {
+    font-size: 11pt;
+    color: #ffffff;
+}
+
+.top-hit .mandarin-spotlight-row-title {
+    font-size: 13pt;
+    font-weight: 500;
+}
+
+.mandarin-spotlight-row-description {
+    font-size: 9pt;
+    color: rgba(255, 255, 255, 0.55);
+    padding-top: 1px;
+}
+
+.mandarin-spotlight-row:selected .mandarin-spotlight-row-description,
+.mandarin-spotlight-row:selected .mandarin-spotlight-row-kind {
+    color: rgba(255, 255, 255, 0.82);
+}
+
+.mandarin-spotlight-row-kind {
+    font-size: 9pt;
+    color: rgba(255, 255, 255, 0.4);
+    padding-left: 8px;
+}
+
+.mandarin-spotlight-web-icon {
+    color: rgba(255, 255, 255, 0.85);
+}

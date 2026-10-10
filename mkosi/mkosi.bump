@@ -1,0 +1,10 @@
+#!/bin/sh
+# "mkosi bump" / "mkosi --auto-bump" ile çağrılır: tarih tabanlı, sıralanabilir
+# bir sürüm üretir. Aynı gün içindeki yapılar son bileşeni artırır.
+set -e
+today=$(date -u +%Y.%m.%d)
+current=$(cat mkosi.version 2>/dev/null || true)
+case "$current" in
+    "$today".*) echo "$today.$(( ${current##*.} + 1 ))" ;;
+    *) echo "$today.0" ;;
+esac

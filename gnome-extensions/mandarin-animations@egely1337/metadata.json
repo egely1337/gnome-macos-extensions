@@ -1,0 +1,10 @@
+{
+  "uuid": "mandarin-animations@egely1337",
+  "name": "mandarinOS Window Animations",
+  "description": "mandarinOS window animations: genie or scale effect when minimizing to the dock, zoom-in on open, fade-out on close.",
+  "shell-version": [
+    "50"
+  ],
+  "version": 1,
+  "settings-schema": "org.gnome.shell.extensions.mandarin-animations"
+}

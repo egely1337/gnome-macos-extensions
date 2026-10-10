@@ -1,0 +1,13 @@
+# mkosi.local.conf olarak kopyalayın (git'e girmez).
+
+[Build]
+# systemd-sysupdate'in yeni sürümleri arayacağı dizin. release.sh'nin
+# ürettiği dosyalar (SHA256SUMS, *.efi, *.usr-*.raw) buraya yüklenir.
+Environment=MANDARIN_UPDATE_URL=https://updates.ornek.org/mandarinos/x86-64
+
+[Validation]
+# Anahtarlar başka yerdeyse:
+# SecureBootKey=/yol/mkosi.key
+# SecureBootCertificate=/yol/mkosi.crt
+# VerityKey=/yol/mkosi.key
+# VerityCertificate=/yol/mkosi.crt

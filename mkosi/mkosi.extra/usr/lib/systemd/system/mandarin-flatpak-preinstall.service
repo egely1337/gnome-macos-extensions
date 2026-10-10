@@ -1,0 +1,20 @@
+[Unit]
+Description=mandarinOS uygulamalarını kur (Bazaar ve temel Flatpak'lar)
+Documentation=man:flatpak-preinstall(1)
+Wants=network-online.target
+After=network-online.target
+ConditionPathIsDirectory=/usr/share/flatpak/preinstall.d
+
+[Service]
+Type=oneshot
+# Flathub uzak deposu /usr/share/flatpak/remotes.d'den gelir; yine de
+# eklenmemişse ekle.
+ExecStartPre=/usr/bin/flatpak remote-add --system --if-not-exists flathub /usr/share/flatpak/remotes.d/flathub.flatpakrepo
+ExecStart=/usr/bin/flatpak preinstall --system --noninteractive -y
+Restart=on-failure
+RestartSec=2min
+Nice=10
+IOSchedulingClass=idle
+
+[Install]
+WantedBy=multi-user.target

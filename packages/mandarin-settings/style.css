@@ -1,0 +1,253 @@
+/* System Settings, macOS 27 style. Colours come from libadwaita's
+ * variables so light, dark and the accent colour all follow the system. */
+
+/* The sidebar floats over the window as an inset pane of glass. */
+.sidebar-pane {
+    background: transparent;
+}
+
+window.background {
+    background-color: var(--window-bg-color);
+}
+
+.floating-sidebar {
+    margin: 8px 0 8px 8px;
+    border-radius: 18px;
+    background-color: color-mix(in srgb, var(--sidebar-bg-color) 85%, var(--window-fg-color) 4%);
+    box-shadow:
+        inset 0 1px rgb(255 255 255 / 0.08),
+        0 0 0 1px rgb(0 0 0 / 0.06),
+        0 6px 24px rgb(0 0 0 / 0.10);
+}
+
+.floating-sidebar headerbar {
+    background: transparent;
+    box-shadow: none;
+}
+
+.floating-sidebar searchentry {
+    border-radius: 9px;
+    min-height: 30px;
+}
+
+.floating-sidebar scrolledwindow,
+.settings-sidebar {
+    background: transparent;
+}
+
+/* Sidebar rows: compact, rounded, and filled with the accent colour when
+ * selected, like macOS. */
+.settings-sidebar {
+    padding: 2px 8px 10px 8px;
+}
+
+.settings-sidebar > row.pane-row {
+    border-radius: 8px;
+    padding: 4px 8px;
+    min-height: 30px;
+    margin: 0;
+}
+
+.settings-sidebar > row.pane-row:selected {
+    background-color: var(--accent-bg-color);
+    color: var(--accent-fg-color);
+}
+
+.settings-sidebar > row.pane-row:selected .external-hint {
+    color: var(--accent-fg-color);
+}
+
+.settings-sidebar .section-gap {
+    min-height: 12px;
+}
+
+.external-hint {
+    opacity: 0;
+}
+
+.settings-sidebar > row.pane-row:hover .external-hint {
+    opacity: 0.6;
+}
+
+.account-card {
+    margin: 4px 8px 8px 8px;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+/* The coloured icon tiles. */
+.tile {
+    color: white;
+    border-radius: 7px;
+    box-shadow:
+        inset 0 1px rgb(255 255 255 / 0.30),
+        inset 0 -1px rgb(0 0 0 / 0.10),
+        0 0.5px 1.5px rgb(0 0 0 / 0.30);
+    -gtk-icon-shadow: 0 1px 1px rgb(0 0 0 / 0.15);
+}
+
+.tile-small {
+    min-width: 24px;
+    min-height: 24px;
+}
+
+.tile-large {
+    min-width: 64px;
+    min-height: 64px;
+    border-radius: 15px;
+}
+
+.tile-blue   { background-image: linear-gradient(to bottom, #3ea0ff, #0a6cf0); }
+.tile-green  { background-image: linear-gradient(to bottom, #43d769, #1fb14a); }
+.tile-gray   { background-image: linear-gradient(to bottom, #a2a2a8, #77777e); }
+.tile-black  { background-image: linear-gradient(to bottom, #48484d, #1c1c1f); }
+.tile-cyan   { background-image: linear-gradient(to bottom, #4fd4f5, #16a5dc); }
+.tile-red    { background-image: linear-gradient(to bottom, #ff6159, #e9352b); }
+.tile-pink   { background-image: linear-gradient(to bottom, #ff5c84, #e8305c); }
+.tile-indigo { background-image: linear-gradient(to bottom, #7a70ff, #4b3fe0); }
+.tile-purple { background-image: linear-gradient(to bottom, #c77dff, #9442e6); }
+
+/* Content pages. */
+.page-title {
+    font-weight: 700;
+    font-size: 15pt;
+    margin-left: 6px;
+}
+
+.page-header {
+    margin: 6px 0 4px 0;
+}
+
+preferencespage list.boxed-list {
+    border-radius: 12px;
+}
+
+preferencespage list.boxed-list > row:first-child {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+preferencespage list.boxed-list > row:last-child {
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.slider-captions label {
+    font-size: 8pt;
+}
+
+/* General: the "About" hero. */
+.about-hero {
+    padding: 22px 12px 18px 12px;
+}
+
+.about-logo {
+    margin-bottom: 6px;
+}
+
+/* Appearance: the mini desktops. */
+.appearance-card {
+    padding: 6px;
+    border-radius: 12px;
+}
+
+.appearance-preview {
+    border-radius: 9px;
+    box-shadow: 0 0 0 1px rgb(0 0 0 / 0.12), 0 2px 6px rgb(0 0 0 / 0.15);
+}
+
+.appearance-card:checked .appearance-preview {
+    box-shadow: 0 0 0 3px var(--accent-bg-color), 0 2px 6px rgb(0 0 0 / 0.15);
+}
+
+.appearance-card:checked {
+    background: transparent;
+}
+
+.appearance-light {
+    background-image: linear-gradient(135deg, #8ec5ff, #e0c3fc);
+}
+
+.appearance-dark {
+    background-image: linear-gradient(135deg, #1e2a5a, #4a1d5c);
+}
+
+.mini-menubar {
+    border-radius: 9px 9px 0 0;
+}
+
+.appearance-light .mini-menubar { background-color: rgb(255 255 255 / 0.65); }
+.appearance-dark  .mini-menubar { background-color: rgb(0 0 0 / 0.45); }
+
+.mini-window {
+    border-radius: 5px 5px 0 0;
+}
+
+.appearance-light .mini-window { background-color: #f6f6f8; }
+.appearance-dark  .mini-window { background-color: #2b2b2f; }
+
+.mini-light {
+    border-radius: 99px;
+    min-width: 4px;
+    min-height: 4px;
+}
+
+.mini-red    { background-color: #ff5f57; }
+.mini-yellow { background-color: #febc2e; }
+.mini-green  { background-color: #28c840; }
+
+/* Appearance: accent colour swatches. */
+.accent-swatch {
+    min-width: 20px;
+    min-height: 20px;
+    padding: 0;
+    border-radius: 99px;
+    color: transparent;
+    box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.12);
+}
+
+.accent-swatch:checked {
+    color: white;
+    box-shadow: 0 0 0 2px var(--window-bg-color), 0 0 0 4px color-mix(in srgb, currentColor 0%, var(--window-fg-color) 35%);
+}
+
+.accent-blue   { background-color: #3584e4; }
+.accent-teal   { background-color: #2190a4; }
+.accent-green  { background-color: #3a944a; }
+.accent-yellow { background-color: #c88800; }
+.accent-orange { background-color: #ed5b00; }
+.accent-red    { background-color: #e62d42; }
+.accent-pink   { background-color: #d56199; }
+.accent-purple { background-color: #9141ac; }
+.accent-slate  { background-color: #6f8396; }
+
+/* Wallpaper. */
+.wallpaper-current {
+    border-radius: 10px;
+}
+
+.wallpaper-grid {
+    padding: 14px;
+}
+
+.wallpaper-thumb {
+    padding: 0;
+    border-radius: 10px;
+}
+
+.wallpaper-thumb picture {
+    border-radius: 10px;
+    background-color: var(--card-shade-color);
+}
+
+.wallpaper-thumb:hover picture {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-bg-color) 60%, transparent);
+}
+
+.dynamic-badge {
+    color: white;
+    padding: 3px;
+    border-radius: 99px;
+    background-color: rgb(0 0 0 / 0.45);
+    -gtk-icon-size: 12px;
+}

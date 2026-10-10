@@ -1,0 +1,9 @@
+gschemas.compiled
+mkosi/mkosi.output/
+mkosi/mkosi.cache/
+mkosi/mkosi.tools/
+mkosi/mkosi.local.conf
+mkosi/mkosi.key
+mkosi/mkosi.crt
+mkosi/keys/*.key
+mkosi/keys/*.sec

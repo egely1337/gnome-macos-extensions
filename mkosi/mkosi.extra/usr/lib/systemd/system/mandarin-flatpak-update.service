@@ -1,0 +1,11 @@
+[Unit]
+Description=Flatpak uygulamalarını güncelle
+Wants=network-online.target
+After=network-online.target mandarin-flatpak-preinstall.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/flatpak update --system --noninteractive -y
+ExecStart=/usr/bin/flatpak uninstall --system --unused --noninteractive -y
+Nice=10
+IOSchedulingClass=idle

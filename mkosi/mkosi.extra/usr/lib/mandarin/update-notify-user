@@ -1,0 +1,12 @@
+#!/bin/bash
+# Oturumda, yeni bir sistem sürümü kurulup yeniden başlatmayı beklediğinde
+# bildirim gösterir.
+version=$(cat /run/mandarin/update-pending 2>/dev/null)
+body="Yeni sürüm${version:+ ($version)} kuruldu. Uygulamak için bilgisayarı yeniden başlatın."
+exec gdbus call --session \
+    --dest org.freedesktop.Notifications \
+    --object-path /org/freedesktop/Notifications \
+    --method org.freedesktop.Notifications.Notify \
+    "mandarinOS" 0 "system-software-update" \
+    "mandarinOS güncellemesi hazır" "$body" \
+    "[]" "{'urgency': <byte 1>}" 0

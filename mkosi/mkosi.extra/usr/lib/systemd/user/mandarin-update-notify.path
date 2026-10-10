@@ -1,0 +1,8 @@
+[Unit]
+Description=mandarinOS güncellemesini izle
+
+[Path]
+PathExists=/run/mandarin/update-pending
+
+[Install]
+WantedBy=gnome-session.target
